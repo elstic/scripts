@@ -16,17 +16,18 @@ def insert_data(start):
     return data
 
 #  CLUSTER_ENDPOINT sys.argv[1]
-#  start sys.argv[2]
-#  batch sys.argv[3]
+#  token sys.argv[2]
+#  start sys.argv[3]
+#  batch sys.argv[4]
 def func_test(coll_name):
     # CLUSTER_ENDPOINT = "https://in01-b80bbc7748deadd.aws-us-west-2.vectordb-uat3.zillizcloud.com:19544"
     # CLUSTER_ENDPOINT = "https://in01-26de4d26fdfeac6.aws-us-west-2.vectordb-uat3.zillizcloud.com:19534"
     CLUSTER_ENDPOINT = sys.argv[1]
+    token = sys.argv[2]
     # 1. Set up a Milvus client
     client = MilvusClient(
         uri=CLUSTER_ENDPOINT,
-        user="db_admin",
-        password="Milvus123"
+        token=token
     )
 
     collection_name = coll_name
@@ -98,8 +99,8 @@ def func_test(coll_name):
 
 
 if __name__ == '__main__':
-        sta = int(sys.argv[2])
-        batch = int(sys.argv[3])
+        sta = int(sys.argv[3])
+        batch = int(sys.argv[4])
         process_list = []
         for i in range(sta, sta+batch):
             coll_name = "coll_" + str(i)
