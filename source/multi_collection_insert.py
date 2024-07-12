@@ -1,4 +1,5 @@
 import random
+import string
 import sys
 
 from pymilvus import MilvusClient, DataType
@@ -101,10 +102,26 @@ def func_test(coll_name):
 if __name__ == '__main__':
         sta = int(sys.argv[3])
         batch = int(sys.argv[4])
+        rand = bool(sys.argv[5])
+        concurrent = bool(sys.argv[6])
         process_list = []
-        for i in range(sta, sta+batch):
-            coll_name = "coll_" + str(i)
-            p = Process(target=func_test, args=(coll_name,))
-            p.start()
-            # process_list.append(p)
-
+            
+        if not concurrent:
+            for i in range(sta, sta + batch):
+                if rand:
+                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(4))
+                else:
+                    coll_name = "coll_" + str(i)
+                func_test(coll_name)
+        else:
+            processes = []
+            for i in range(sta, sta + batch):
+                if rand:
+                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(4))
+                else:
+                    coll_name = "coll_" + str(i)
+                p = Process(target=func_test, args=(coll_name,))
+                p.start()
+                processes.append(p)
+            # for p in processes:
+            #     p.join()
