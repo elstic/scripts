@@ -109,7 +109,7 @@ if __name__ == '__main__':
         if not concurrent:
             for i in range(sta, sta + batch):
                 if rand:
-                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(4))
+                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(5))
                 else:
                     coll_name = "coll_" + str(i)
                 func_test(coll_name)
@@ -117,7 +117,7 @@ if __name__ == '__main__':
             processes = []
             for i in range(sta, sta + batch):
                 if rand:
-                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(4))
+                    coll_name = "coll_" + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(5))
                 else:
                     coll_name = "coll_" + str(i)
                 p = Process(target=func_test, args=(coll_name,))
