@@ -2,7 +2,10 @@ stages:
   - deploy
 
 deploy-job:
+  tags:
+    - test-tag
   stage: deploy
   script:
-    - echo "abc"
-    - echo "11"
+    - echo "hello"
+    - apt update && apt-get install python3-pip -y
+    - python3 -m http.server
