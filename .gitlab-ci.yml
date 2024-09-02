@@ -5,4 +5,4 @@ deploy-job:
   stage: deploy
   script:
     - echo "abc"
-    - echo "123"
+    - echo "11"
